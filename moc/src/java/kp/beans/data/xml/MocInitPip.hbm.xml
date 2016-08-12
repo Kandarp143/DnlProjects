@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 10, 2015 7:53:18 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="kp.beans.data.pojo.MocInitPip" optimistic-lock="version"  table="MOC_INIT_PIP">
+    <id name="caseId" type="integer">
+      <column name="CASE_ID" precision="22" scale="0"/>
+      <generator class="foreign">
+        <param name="property">MocInitMst</param>
+      </generator>
+    </id>
+    <one-to-one class="kp.beans.data.pojo.MocInitMst" constrained="true" name="MocInitMst">
+        </one-to-one>
+    <property name="d1" type="string">
+      <column length="5" name="D1"/>
+    </property>
+    <property name="d2" type="string">
+      <column length="5" name="D2"/>
+    </property>
+    <property name="d3" type="string">
+      <column length="5" name="D3"/>
+    </property>
+    <property name="d4" type="string">
+      <column length="5" name="D4"/>
+    </property>
+    <property name="d5" type="string">
+      <column length="5" name="D5"/>
+    </property>
+    <property name="d6" type="string">
+      <column length="5" name="D6"/>
+    </property>
+    <property name="d7" type="string">
+      <column length="1000" name="D7"/>
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 10, 2015 7:53:18 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="kp.beans.data.pojo.MocInitProd" optimistic-lock="version"  table="MOC_INIT_PROD">
+    <id name="caseId" type="integer">
+      <column name="CASE_ID" precision="22" scale="0"/>
+      <generator class="foreign">
+        <param name="property">MocInitMst</param>
+      </generator>
+    </id>
+    <one-to-one class="kp.beans.data.pojo.MocInitMst" constrained="true" name="MocInitMst">
+        </one-to-one>
+    <property name="f1" type="string">
+      <column length="5" name="F1"/>
+    </property>
+    <property name="f2" type="string">
+      <column length="5" name="F2"/>
+    </property>
+    <property name="f3" type="string">
+      <column length="5" name="F3"/>
+    </property>
+    <property name="f4" type="string">
+      <column length="5" name="F4"/>
+    </property>
+    <property name="f5" type="string">
+      <column length="5" name="F5"/>
+    </property>
+    <property name="f6" type="string">
+      <column length="1000" name="F6"/>
+    </property>
+  </class>
+</hibernate-mapping>

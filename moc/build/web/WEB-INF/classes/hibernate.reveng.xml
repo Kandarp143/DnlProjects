@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <table-filter match-name="MOC_WF_USER"/>
+  <table-filter match-name="MOC_INIT_TSK_MST"/>
+  <table-filter match-name="MOC_USER_MST"/>
+  <table-filter match-name="MOC_USER_ROLE_DT"/>
+  <table-filter match-name="MOC_USER_PASS"/>
+  <table-filter match-name="MOC_INIT_TSK_DT"/>
+  <table-filter match-name="MOC_PLANT_MST"/>
+  <table-filter match-name="MOC_ENG_MST"/>
+  <table-filter match-name="MOC_WF_STG_ACT"/>
+  <table-filter match-name="MOC_WF_TRAN"/>
+  <table-filter match-name="MOC_WF_ATT"/>
+  <table-filter match-name="MOC_INIT_ROT"/>
+  <table-filter match-name="MOC_INIT_PROD"/>
+  <table-filter match-name="MOC_QC_MST"/>
+  <table-filter match-name="MOC_WF_ACT"/>
+  <table-filter match-name="MOC_INIT_STA"/>
+  <table-filter match-name="MOC_INIT_MST"/>
+  <table-filter match-name="MOC_INIT_PSEQ"/>
+  <table-filter match-name="MOC_INIT_REQ"/>
+  <table-filter match-name="MOC_UNIT_MST"/>
+  <table-filter match-name="MOC_INIT_PIP"/>
+  <table-filter match-name="MOC_INIT_PROC"/>
+  <table-filter match-name="MOC_TS_MST"/>
+  <table-filter match-name="MOC_USER_ROLE_MST"/>
+  <table-filter match-name="MOC_HSE_MST"/>
+  <table-filter match-name="MOC_WF_STG"/>
+  <table-filter match-name="MOC_WF_STG_ROLE"/>
+  <table-filter match-name="MOC_INIT_ELE"/>
+  <table-filter match-name="MOC_USER_LOGIN_HISTORY"/>
+</hibernate-reverse-engineering>

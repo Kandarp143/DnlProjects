@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 10, 2015 7:53:18 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="kp.beans.data.pojo.MocInitMst" optimistic-lock="version"  table="MOC_INIT_MST">
+        <id name="caseId" type="integer">
+            <column name="CASE_ID" precision="22" scale="0"/>
+            <generator class="increment"/>
+        </id>
+        <one-to-one cascade="save-update,delete" class="kp.beans.data.pojo.MocInitReq" fetch="join" name="mocInitReq">
+        </one-to-one>
+        <one-to-one cascade="save-update,delete" class="kp.beans.data.pojo.MocInitSta" fetch="join" name="mocInitSta">
+        </one-to-one>
+        <one-to-one cascade="save-update,delete" class="kp.beans.data.pojo.MocInitRot" fetch="join" name="mocInitRot">
+        </one-to-one>
+        <one-to-one cascade="save-update,delete" class="kp.beans.data.pojo.MocInitPip" fetch="join" name="mocInitPip">
+        </one-to-one>
+        <one-to-one cascade="save-update,delete" class="kp.beans.data.pojo.MocInitEle" fetch="join" name="mocInitEle">
+        </one-to-one>
+        <one-to-one cascade="save-update,delete" class="kp.beans.data.pojo.MocInitProd" fetch="join" name="mocInitProd">
+        </one-to-one>
+        <one-to-one cascade="save-update,delete" class="kp.beans.data.pojo.MocInitProc" fetch="join" name="mocInitProc">
+        </one-to-one>
+        <one-to-one cascade="save-update,delete" class="kp.beans.data.pojo.MocInitPseq" fetch="join" name="mocInitPseq">
+        </one-to-one>
+        <one-to-one cascade="save-update,delete" class="kp.beans.data.pojo.MocTsMst" fetch="join" name="mocTsMst">
+        </one-to-one>
+        <one-to-one cascade="save-update,delete" class="kp.beans.data.pojo.MocQcMst" fetch="join" name="mocQcMst">
+        </one-to-one>
+        <one-to-one cascade="save-update,delete" class="kp.beans.data.pojo.MocHseMst" fetch="join" name="mocSheMst">
+        </one-to-one>
+        <property name="userId" type="string">
+            <column length="10" name="USER_ID"/>
+        </property>
+        <property name="crDate" type="date">
+            <column length="7" name="CR_DATE"/>
+        </property>
+        <property name="status" type="string">
+            <column length="50" name="STATUS"/>
+        </property>
+        <property name="mocNo" type="string">
+            <column length="20" name="MOC_NO"/>
+        </property>
+        <property name="unitId" type="string">
+            <column length="10" name="UNIT_ID" not-null="true"/>
+        </property>
+        <property name="appDate" type="date">
+            <column length="7" name="APP_DATE"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="mocEngMsts" table="MOC_ENG_MST">
+            <key>
+                <column name="CASE_ID" precision="22" scale="0"/>
+            </key>
+            <one-to-many class="kp.beans.data.pojo.MocEngMst"/>
+        </set>
+        <set cascade="save-update,delete" fetch="select" inverse="true" lazy="true" name="mocInitTskDts" table="MOC_INIT_TSK_DT">
+            <key>
+                <column name="CASE_ID" precision="22" scale="0"/>
+            </key>
+            <one-to-many class="kp.beans.data.pojo.MocInitTskDt"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="mocWfTran" table="MOC_WF_TRAN">
+            <key>
+                <column name="CASE_ID" precision="22" scale="0"/>
+            </key>
+            <one-to-many class="kp.beans.wf.pojo.MocWfTran"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="mocWfUser" table="MOC_WF_USER">
+            <key>
+                <column name="CASE_ID" precision="22" scale="0"/>
+            </key>
+            <one-to-many class="kp.beans.wf.pojo.MocWfUser"/>
+        </set>
+    </class>
+</hibernate-mapping>

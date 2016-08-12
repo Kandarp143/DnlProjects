@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 10, 2015 7:53:18 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping default-cascade="none" default-access="property" default-lazy="true" auto-import="true">
+    <query name="authUser" cacheable="false"><![CDATA[from MocUserPass a,MocUserMst b where a.userId =:user_id AND a.password = :password AND b.isActive = 'Y']]></query>
+    <sql-query name="deleteTskDt" cacheable="false" callable="false"><![CDATA[delete from moc_init_tsk_dt where case_id = :caseId]]></sql-query>
+    <sql-query name="updateTskDt" cacheable="false" callable="false"><![CDATA[UPDATE moc_init_tsk_dt a
+   SET a.com_date = :comdate
+ WHERE a.case_id = :caseId AND a.doc_id = :docId AND a.res_party = :resParty]]></sql-query>
+    <sql-query name="getAccRole" cacheable="false" callable="false"><![CDATA[SELECT DISTINCT mst.role_id
+  FROM moc_user_role_mst mst, moc_user_role_dt dt
+ WHERE mst.role_id = dt.role_id
+   AND mst.role_type = 'ACC_ROLE'
+   AND dt.user_id = :userid]]></sql-query>
+    <sql-query name="getMocAtt" cacheable="false" callable="false">
+<![CDATA[SELECT att.case_id, usr.user_name, TO_CHAR (att.act_date, 'DD-MON-YYYY'),
+       att.f_name, att.f_path,att.ATT_TYPE
+  FROM moc_wf_att att, moc_user_mst usr
+ WHERE usr.user_id = att.user_id AND att.case_id = :cid]]></sql-query>
+    <sql-query name="isCreator" cacheable="false" callable="false"><![CDATA[SELECT *
+  FROM moc_user_role_dt
+ WHERE user_id = :user_id AND role_id = 'CR']]></sql-query>
+    <sql-query name="getWorkFlowSelection" cacheable="false" callable="false"><![CDATA[SELECT stg.stg_id, stg.stg_name, mstrole.role_id, mstrole.role_name,
+         usr.user_id, usr.user_name, usr.unit
+    FROM moc_wf_stg stg,
+         moc_wf_stg_role stgrole,
+         moc_user_role_dt ROLE,
+         moc_user_role_mst mstrole,
+         moc_user_mst usr
+   WHERE stg.stg_id = stgrole.stg_id
+     AND ROLE.role_id = stgrole.role_id
+     AND mstrole.role_id = ROLE.role_id
+     AND usr.user_id = ROLE.user_id
+     AND role.GROUP_1 = :unit
+ORDER BY stg.stg_id, usr.unit,usr.USER_NAME]]></sql-query>
+    <sql-query name="getUserHierarchy" cacheable="false" callable="false">
+<![CDATA[SELECT   stg_id, wf_user_id
+    FROM moc_user_hier
+   WHERE act_user_id = :uid
+ORDER BY stg_id]]></sql-query>
+    <sql-query name="getWorkFlowUsers" cacheable="false" callable="false"><![CDATA[SELECT DISTINCT  wfusr.stg_id, stgmst.stg_name, wfusr.user_id, usrmst.user_name
+    FROM moc_wf_user wfusr, moc_user_mst usrmst, moc_wf_stg stgmst
+   WHERE wfusr.user_id = usrmst.user_id
+     AND wfusr.stg_id = stgmst.stg_id
+     AND wfusr.case_id = :cid
+ORDER BY wfusr.stg_id]]></sql-query>
+    <sql-query name="getTransactions" cacheable="false" callable="false">
+<![CDATA[
+SELECT DISTINCT stgc.stg_name stgc, stgn.stg_name stgn, usrc.user_name userc,act.act_name,
+       to_char(tran.act_date,'DD-MON-YYYY'), tran.cmt, usrn.user_name usern,
+       DECODE (tran.is_completed,
+               'Y', 'Completed',
+               'R', 'Rejected',
+               'Pending'
+              ) is_comp,tran.TRAN_ID
+  FROM moc_wf_tran tran,
+       moc_wf_act act,
+       moc_wf_stg stgc,
+       moc_wf_stg stgn,
+       moc_user_mst usrc,
+       moc_user_mst usrn,
+       moc_init_mst mst
+ WHERE tran.case_id = mst.case_id
+   AND tran.stg_c = stgc.stg_id
+   AND tran.stg_n = stgn.stg_id
+   AND tran.user_c = usrc.user_id
+   AND tran.user_n = usrn.user_id
+   AND tran.act = act.act_id
+   AND tran.CASE_ID = :cid
+   ORDER BY tran.TRAN_ID]]></sql-query>
+    <sql-query name="isTranactionPending" cacheable="false" callable="false">
+      <![CDATA[ SELECT *
+  FROM moc_wf_tran t1
+ WHERE t1.stg_c = (SELECT DISTINCT t2.stg_c
+                              FROM moc_wf_tran t2
+                             WHERE t2.case_id = :cid AND t2.stg_n = :sid)
+   AND t1.is_completed IS NULL
+   AND t1.case_id = :cid]]>
+    </sql-query>
+   
+    <sql-query name="getNxtUser" cacheable="false" callable="false"><![CDATA[SELECT DISTINCT wfusr.user_id, usr.user_name,wfusr.stg_id
+           FROM moc_wf_user wfusr, moc_user_mst usr
+          WHERE usr.user_id = wfusr.user_id AND stg_id = :sid AND case_id = :cid]]></sql-query>
+    <sql-query name="getBackUser" cacheable="false" callable="false">
+<![CDATA[SELECT  DISTINCT moc_wf_stg_act.stg_n, moc_wf_stg2.stg_name, moc_wf_user.user_id,
+       moc_user_mst.user_name
+  FROM moc_wf_stg_act,
+       moc_wf_act,
+       moc_wf_stg moc_wf_stg2,
+       moc_wf_stg,
+       moc_wf_user,
+       moc_user_mst
+ WHERE (    (moc_wf_stg.stg_id = moc_wf_stg_act.stg_c)
+        AND (moc_wf_stg2.stg_id = moc_wf_stg_act.stg_n)
+        AND (moc_wf_act.act_id = moc_wf_stg_act.act)
+        AND (moc_wf_user.stg_id = moc_wf_stg_act.stg_n)
+        AND (moc_user_mst.user_id = moc_wf_user.user_id)
+        AND (moc_wf_stg_act.stg_c = :sid)
+        AND (moc_wf_stg_act.act = 4)
+        AND (moc_wf_user.case_id = :cid)
+       )]]></sql-query>
+    <sql-query name="getParellelUser" cacheable="false" callable="false">
+<![CDATA[select user_n,case_id from moc_wf_tran where case_id = :cid and is_completed is null and stg_n = :sid]]>
+    </sql-query>
+    <sql-query name="getNxtStg" cacheable="false" callable="false"><![CDATA[SELECT DISTINCT stg_n
+           FROM moc_wf_stg_act
+          WHERE stg_c = :stg_c AND act = :act]]></sql-query>
+    <sql-query name="getStgName" cacheable="false" callable="false"><![CDATA[SELECT DISTINCT stg_name
+  FROM moc_wf_stg
+ WHERE stg_id = :sid]]></sql-query>
+    <sql-query name="getMocListByStatus" cacheable="false" callable="false"><![CDATA[SELECT DISTINCT moc_init_mst.case_id,
+                TO_CHAR (moc_init_mst.cr_date, 'DD-MON-YYYY') cr_date,
+                moc_init_mst.user_id, moc_user_mst.user_name, moc_init_req.a1,
+                moc_init_req.a2, moc_init_req.a4
+           FROM moc_init_mst, moc_user_mst, moc_init_req
+          WHERE (    (moc_init_mst.user_id = moc_user_mst.user_id)
+                 AND (moc_init_mst.case_id = moc_init_req.case_id)
+                 AND (moc_init_mst.status = :status)
+                 AND (moc_init_mst.user_id = :userid)
+                )
+       ORDER BY moc_init_mst.case_id
+]]></sql-query>
+    <sql-query name="getMocListByUser" cacheable="false" callable="false">
+<![CDATA[SELECT DISTINCT moc_init_mst.case_id case_id,
+                TO_CHAR (moc_init_mst.cr_date, 'DD-MON-YYYY') cr_date,
+                moc_init_mst.user_id creator_id,
+                moc_user_mst.user_name creator_name, moc_init_req.a4 title,
+                moc_init_req.a1 unit, moc_init_req.a2 plant,
+                moc_wf_tran.stg_c cur_stg, moc_wf_stg.stg_name cur_stg_name,
+                moc_wf_tran.act act, moc_wf_act.act_name,
+                moc_wf_tran.user_c cur_usr,
+                moc_user_mst2.user_name cur_usr_name,
+                TO_CHAR (moc_wf_tran.act_date, 'DD-MON-YYYY'),
+                moc_wf_tran.stg_n, moc_wf_stg2.stg_name
+           FROM moc_wf_tran,
+                moc_wf_stg,
+                moc_wf_act,
+                moc_wf_stg moc_wf_stg2,
+                moc_init_mst,
+                moc_init_req,
+                moc_user_mst,
+                moc_user_mst moc_user_mst2
+          WHERE (    (moc_init_mst.case_id = moc_wf_tran.case_id)
+                 AND (moc_init_mst.case_id = moc_init_req.case_id)
+                 AND (moc_user_mst.user_id = moc_init_mst.user_id)
+                 AND (moc_user_mst2.user_id = moc_wf_tran.user_c)
+                 AND (moc_wf_act.act_id = moc_wf_tran.act)
+                 AND (moc_wf_stg.stg_id = moc_wf_tran.stg_c)
+                 AND (moc_wf_stg2.stg_id = moc_wf_tran.stg_n)
+                 AND (moc_wf_tran.user_n = :userid)
+                 AND (moc_wf_tran.is_completed IS NULL)
+                 AND (moc_init_mst.status <> 'Rejected')
+                )]]></sql-query>
+                
+ 
+ 
+                
+    <sql-query name="getUserByUnit" cacheable="false" callable="false">
+<![CDATA[SELECT user_id, user_name, email_id
+  FROM moc_user_mst
+ WHERE unit = :unit AND is_active = 'Y' 
+ ORDER BY user_name]]></sql-query>
+ 
+    <sql-query name="getTskDD" cacheable="false" callable="false">
+<![CDATA[select * from moc_init_tsk_mst order by doc_id]]></sql-query>
+    <sql-query name="fetchTaskList" cacheable="false" callable="false">
+<![CDATA[SELECT moc_init_tsk_mst.doc_id, moc_init_tsk_mst.doc_title,
+       TO_CHAR (moc_init_tsk_dt.tar_date, 'DD-MON-YYYY') tar_date_string,
+       moc_user_mst.user_name,
+       TO_CHAR (moc_init_tsk_dt.com_date, 'DD-MON-YYYY') com_date_string,
+       DECODE(moc_init_tsk_dt.UP,'','false',moc_init_tsk_dt.UP) up,
+       tar_date,res_party,com_date 
+  FROM moc_init_tsk_dt, moc_init_tsk_mst, moc_user_mst
+ WHERE ((moc_user_mst.user_id(+) = moc_init_tsk_dt.res_party)
+        AND (moc_init_tsk_mst.doc_id = moc_init_tsk_dt.doc_id(+))
+        AND (moc_init_tsk_dt.case_id(+) =:cid))
+ ORDER BY moc_init_tsk_mst.doc_id
+       ]]></sql-query>
+    <sql-query name="updateMocInitTskDate" cacheable="false" callable="false">
+<![CDATA[UPDATE moc_init_tsk_dt
+   SET com_date = :com_date
+ WHERE doc_id = :doc_id AND case_id = :cid]]></sql-query>
+    <sql-query name="getMocEngMstByUser" cacheable="false" callable="false">
+<![CDATA[SELECT DISTINCT *
+           FROM moc_eng_mst
+          WHERE case_id = :cid AND user_id = :uid]]></sql-query>
+</hibernate-mapping>

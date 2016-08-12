@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 10, 2015 7:53:18 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="kp.beans.wf.pojo.MocWfStg" optimistic-lock="version"  table="MOC_WF_STG">
+        <id name="stgId" type="integer">
+            <column name="STG_ID" precision="22" scale="0"/>
+            <generator class="increment"/>
+        </id>
+        <property name="stgName" type="string">
+            <column length="50" name="STG_NAME"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="mocWfStgActsForStgC" table="MOC_WF_STG_ACT">
+            <key>
+                <column name="STG_C" precision="22" scale="0"/>
+            </key>
+            <one-to-many class="kp.beans.wf.pojo.MocWfStgAct"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="mocWfStgActsForStgN" table="MOC_WF_STG_ACT">
+            <key>
+                <column name="STG_N" precision="22" scale="0"/>
+            </key>
+            <one-to-many class="kp.beans.wf.pojo.MocWfStgAct"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="mocWfStgRoles" table="MOC_WF_STG_ROLE">
+            <key>
+                <column name="STG_ID" precision="22" scale="0"/>
+            </key>
+            <one-to-many class="kp.beans.wf.pojo.MocWfStgRole"/>
+        </set>
+    </class>
+</hibernate-mapping>

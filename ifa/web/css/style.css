@@ -1,0 +1,121 @@
+@charset "utf-8";
+/* CSS Document */
+/* General Demo Style */
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+@font-face {
+    font-family: 'fontawesome';
+    src:url('fonts/fontawesome.eot');
+    src:url('fonts/fontawesome.eot?#iefix') format('embedded-opentype'),
+        url('fonts/fontawesome.svg#fontawesome') format('svg'),
+        url('fonts/fontawesome.woff') format('woff'),
+        url('fonts/fontawesome.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body, html { 
+    font-size: 100%; 	
+    padding: 0; 
+    margin: 0;
+    font-family: 'Lato', Calibri, Arial, sans-serif;
+}
+
+
+a {
+    color: #3b5998;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #666;
+}
+
+ul, ol, dl {
+    padding: 0;
+    margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+    margin-top: 0;	 
+    padding-right: 1px;
+    padding-left: 15px; }
+
+/* ~~ this fixed width container surrounds all other elements ~~ */
+.container {
+    width: 80%;
+    margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout */
+}
+/* ~~ This is the layout information. ~~ 
+
+1) Padding is only placed on the top and/or bottom of the div. The elements within this div have padding on their sides. This saves you from any "box model math". Keep in mind, if you add any side padding or border to the div itself, it will be added to the width you define to create the *total* width. You may also choose to remove the padding on the element in the div and place a second div within it with no width and the padding necessary for your design.
+
+*/
+.content {
+    padding: 10px 10px;
+}
+/* ~~ miscellaneous float/clear classes ~~ */
+.fltrt {  /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
+    float: right;
+    margin-left: 8px;
+}
+.fltlft { /* this class can be used to float an element left in your page. The floated element must precede the element it should be next to on the page. */
+    float: left;
+    margin-right: 8px;
+}
+.clearfloat { /* this class can be placed on a <br /> or empty div as the final element following the last floated div (within the #container) if the overflow:hidden on the .container is removed */
+    clear:both;
+    height:0;
+    font-size: 1px;
+    line-height: 0px;
+}
+table{
+    border-color:#C4C4C4;
+    font-size:12px;
+}
+table th{
+
+
+}
+select, button {
+    width : 200px;
+    height:auto;
+    margin: 0;
+    -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
+    -moz-box-sizing: border-box; /* For all Gecko based browsers */
+    box-sizing: border-box;
+}
+text{
+    width : 400px;
+    height:auto;
+    margin: 0;
+    -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
+    -moz-box-sizing: border-box; /* For all Gecko based browsers */
+    box-sizing: border-box;
+}
+checkbox {
+    width : 5px;
+    margin: 0;
+    -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
+    -moz-box-sizing: border-box; /* For all Gecko based browsers */
+    box-sizing: border-box;
+}
+textarea {
+    width : 760px;
+    margin: 0;
+    -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
+    -moz-box-sizing: border-box; /* For all Gecko based browsers */
+    box-sizing: border-box;
+}
+
+#footer {
+
+    width:100%;
+    height:20px;
+    position:absolute;
+    bottom:-1;
+    left:0;
+    text-align: center;
+    color:#999999;
+    font-size: small;
+}
+

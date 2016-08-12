@@ -1,0 +1,54 @@
+#data_header
+{
+    text-align: center;
+    color: #3b5998;
+    margin-top: 2%
+}
+
+#data_hint
+{
+    margin-left: 10%;
+    color: #666;
+    margin-top: 5%
+}
+
+/*~~Data grid Style*/
+
+.dtb {
+    border: 1px solid #C0C0C0;
+    border-collapse: collapse;
+    /*padding: 1px;*/
+    /*width: 90%;*/
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top: 1%;
+    margin-bottom:1%;
+    font-size: small;
+    position: relative;
+
+}
+.dtb th {
+    border: 1px solid #999999;
+    padding: 1px;
+    background:#C0C0C0;
+    color: #000;
+    text-align: center;
+    font-weight: bold;
+    font-size: small;
+}
+.dtb td {
+    border: 1px solid #C0C0C0;
+    text-align: left;
+    padding: 3px;
+    font-size: small;
+}
+
+.dtb_sub  {
+    width: 100%;
+    height: 100%;
+}
+.dtb_sub  td{  
+    border: 1px solid #C0C0C0;
+    vertical-align: top;
+    font-size: small;
+}

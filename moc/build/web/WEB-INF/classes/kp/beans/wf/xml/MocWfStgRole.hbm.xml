@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 10, 2015 7:53:18 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="kp.beans.wf.pojo.MocWfStgRole" optimistic-lock="version"  table="MOC_WF_STG_ROLE">
+    <id name="id" type="integer">
+      <column name="ID" precision="22" scale="0"/>
+      <generator class="increment"/>
+    </id>
+    <many-to-one class="kp.beans.user.pojo.MocUserRoleMst" fetch="select" name="mocUserRoleMst">
+      <column length="10" name="ROLE_ID"/>
+    </many-to-one>
+    <many-to-one class="kp.beans.wf.pojo.MocWfStg" fetch="select" name="mocWfStg">
+      <column name="STG_ID" precision="22" scale="0"/>
+    </many-to-one>
+  </class>
+</hibernate-mapping>

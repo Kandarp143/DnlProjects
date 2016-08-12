@@ -1,0 +1,80 @@
+  
+
+
+.dtb {
+    border: 1px solid #C0C0C0;
+    border-collapse: collapse;
+    padding: 4px;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: 13px;
+
+}
+.dtb th {
+    border: 1px solid #999999;
+    padding: 1px;
+    background:#C0C0C0;
+    color: #000;
+    text-align: center;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+.dtb td {
+    border: 1px solid #C0C0C0;
+
+    padding: 3px;
+}
+
+
+
+.dtbf {
+    border: 1px solid #C0C0C0;
+    border-collapse: collapse;
+    padding: 4px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: 13px;
+
+}
+.dtbf th {
+    border: 1px solid #999999;
+    padding: 1px;
+    background:#C0C0C0;
+    color: #000;
+    text-align: right;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+.dtbf td {
+    border: 1px solid #C0C0C0;
+    padding: 3px;
+}
+
+.dtb_sub  {
+    width: 100%;
+    height: 100%;
+}
+.dtb_sub  td{  
+    border: 1px solid #C0C0C0;
+    vertical-align: top;
+    border-style: none;
+}
+
+.lbl{
+    float: right;
+
+}
+.readon{
+    margin: 0;
+    background:#D0D0D0 ;
+}
+.cur{
+    text-align:right;
+
+}

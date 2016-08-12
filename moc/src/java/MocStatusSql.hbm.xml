@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 10, 2015 7:53:18 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping default-cascade="none" default-access="property" default-lazy="true" auto-import="true">
+    <sql-query name="getMocStatusListAll" cacheable="false" callable="false">
+<![CDATA[SELECT DISTINCT moc_init_mst.case_id case_id,
+                TO_CHAR (moc_init_mst.cr_date, 'DD-MON-YYYY') cr_date,
+                moc_init_mst.user_id creator_id,
+                moc_user_mst.user_name creator_name, moc_init_req.a4 title,
+                moc_init_req.a1 unit, moc_init_req.a2 plant,
+                NVL(moc_user_mst2.user_name,'-')n_usr_name,
+                moc_wf_tran.stg_n, moc_wf_stg2.stg_name,moc_init_mst.status,NVL(moc_init_mst.MOC_NO,'-')
+           FROM moc_wf_tran,
+                moc_wf_stg,
+                moc_wf_act,
+                moc_wf_stg moc_wf_stg2,
+                moc_init_mst,
+                moc_init_req,
+                moc_user_mst,
+                moc_user_mst moc_user_mst2
+          WHERE (    (moc_init_mst.case_id = moc_wf_tran.case_id)
+                 AND (moc_init_mst.case_id = moc_init_req.case_id)
+                 AND (moc_user_mst.user_id = moc_init_mst.user_id)
+                 AND (moc_user_mst2.user_id(+) = moc_wf_tran.user_n)
+                 AND (moc_wf_act.act_id = moc_wf_tran.act)
+                 AND (moc_wf_stg.stg_id = moc_wf_tran.stg_c)
+                 AND (moc_wf_stg2.stg_id = moc_wf_tran.stg_n)
+                 AND (moc_wf_tran.tran_id IN (SELECT   MAX (tran_id)
+                                                  FROM moc_wf_tran a where a.IS_COMPLETED is null
+                                              GROUP BY case_id))
+                )
+       ORDER BY case_id desc]]></sql-query>
+    <sql-query name="getMocStatusListByUnit" cacheable="false" callable="false">
+<![CDATA[SELECT DISTINCT moc_init_mst.case_id case_id,
+                TO_CHAR (moc_init_mst.cr_date, 'DD-MON-YYYY') cr_date,
+                moc_init_mst.user_id creator_id,
+                moc_user_mst.user_name creator_name, moc_init_req.a4 title,
+                moc_init_req.a1 unit, moc_init_req.a2 plant,
+                NVL (moc_user_mst2.user_name, '-') n_usr_name,
+                moc_wf_tran.stg_n, moc_wf_stg2.stg_name, moc_init_mst.status,
+                NVL (moc_init_mst.moc_no, '-')
+           FROM moc_wf_tran,
+                moc_wf_stg,
+                moc_wf_act,
+                moc_wf_stg moc_wf_stg2,
+                moc_init_mst,
+                moc_init_req,
+                moc_user_mst,
+                moc_user_mst moc_user_mst2
+          WHERE (    (moc_init_mst.case_id = moc_wf_tran.case_id)
+                 AND (moc_init_mst.case_id = moc_init_req.case_id)
+                 AND (moc_user_mst.user_id = moc_init_mst.user_id)
+                 AND (moc_user_mst2.user_id(+) = moc_wf_tran.user_n)
+                 AND (moc_wf_act.act_id = moc_wf_tran.act)
+                 AND (moc_wf_stg.stg_id = moc_wf_tran.stg_c)
+                 AND (moc_wf_stg2.stg_id = moc_wf_tran.stg_n)
+                 AND (moc_wf_tran.tran_id IN (SELECT   MAX (tran_id)
+                                                  FROM moc_wf_tran a
+                                                 WHERE a.is_completed IS NULL
+                                              GROUP BY case_id))
+                 AND (moc_init_req.a1 = :unit)
+                )
+       ORDER BY moc_init_mst.case_id DESC]]></sql-query>
+                  
+    <sql-query name="getMocStatusListByUser" cacheable="false" callable="false">
+<![CDATA[SELECT DISTINCT tran.case_id, TO_CHAR (mst.cr_date, 'DD-MON-YYYY'),
+                mst.user_id, usr.user_name, req.a4, req.a1, req.a2,'no_stage',0,'no_user',
+                mst.status,NVL(mst.MOC_NO,'-')
+           FROM moc_wf_tran tran,
+                moc_init_mst mst,
+                moc_init_req req,
+                moc_user_mst usr
+          WHERE mst.case_id = tran.case_id
+            AND req.case_id = mst.case_id
+            AND usr.user_id = mst.user_id
+            AND mst.status <>'Rejected'
+            AND tran.user_c = :userid ORDER BY case_id desc]]></sql-query>
+</hibernate-mapping>

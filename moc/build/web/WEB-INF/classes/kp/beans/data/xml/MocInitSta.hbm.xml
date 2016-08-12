@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 10, 2015 7:53:18 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="kp.beans.data.pojo.MocInitSta" optimistic-lock="version"  table="MOC_INIT_STA">
+    <id name="caseId" type="integer">
+      <column name="CASE_ID" precision="22" scale="0"/>
+      <generator class="foreign">
+        <param name="property">MocInitMst</param>
+      </generator>
+    </id>
+    <one-to-one class="kp.beans.data.pojo.MocInitMst" constrained="true" name="MocInitMst">
+        </one-to-one>
+    <property name="b1" type="string">
+      <column length="5" name="B1"/>
+    </property>
+    <property name="b2" type="string">
+      <column length="5" name="B2"/>
+    </property>
+    <property name="b3" type="string">
+      <column length="5" name="B3"/>
+    </property>
+    <property name="b4" type="string">
+      <column length="5" name="B4"/>
+    </property>
+    <property name="b5" type="string">
+      <column length="5" name="B5"/>
+    </property>
+    <property name="b6" type="string">
+      <column length="1000" name="B6"/>
+    </property>
+    <property name="b7" type="string">
+      <column length="5" name="B7"/>
+    </property>
+    <property name="b8" type="string">
+      <column length="5" name="B8"/>
+    </property>
+    <property name="b9" type="string">
+      <column length="5" name="B9"/>
+    </property>
+    <property name="b10" type="string">
+      <column length="5" name="B10"/>
+    </property>
+    <property name="b11" type="string">
+      <column length="5" name="B11"/>
+    </property>
+    <property name="b12" type="string">
+      <column length="5" name="B12"/>
+    </property>
+    <property name="b13" type="string">
+      <column length="5" name="B13"/>
+    </property>
+    <property name="b14" type="string">
+      <column length="5" name="B14"/>
+    </property>
+    <property name="b15" type="string">
+      <column length="5" name="B15"/>
+    </property>
+    <property name="b16" type="string">
+      <column length="5" name="B16"/>
+    </property>
+    <property name="b17" type="string">
+      <column length="1000" name="B17"/>
+    </property>
+  </class>
+</hibernate-mapping>

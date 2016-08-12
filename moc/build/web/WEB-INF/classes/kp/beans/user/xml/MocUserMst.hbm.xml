@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 10, 2015 7:53:18 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="kp.beans.user.pojo.MocUserMst" optimistic-lock="version"  table="MOC_USER_MST">
+        <id name="userId" type="string">
+            <column length="10" name="USER_ID"/>
+        </id>
+        <property name="userName" type="string">
+            <column length="100" name="USER_NAME"/>
+        </property>
+        <property name="emailId" type="string">
+            <column length="100" name="EMAIL_ID"/>
+        </property>
+        <property name="unit" type="string">
+            <column length="5" name="UNIT"/>
+        </property>
+        <property name="dept" type="string">
+            <column length="20" name="DEPT"/>
+        </property>
+        <property name="userType" type="string">
+            <column length="50" name="USER_TYPE"/>
+        </property>
+        <property name="isActive" type="java.lang.Character">
+            <column length="1" name="IS_ACTIVE"/>
+        </property>
+        <property name="creationDate" type="date">
+            <column length="7" name="CREATION_DATE"/>
+        </property>
+        <property name="updatedDate" type="date">
+            <column length="7" name="UPDATED_DATE"/>
+        </property>
+        <one-to-one cascade="save-update,delete" class="kp.beans.user.pojo.MocUserPass" fetch="join" name="mocUserPass">
+        </one-to-one>
+        <set fetch="select" inverse="true" lazy="true" name="mocWfAtts" table="MOC_WF_ATT">
+            <key>
+                <column length="10" name="USER_ID"/>
+            </key>
+            <one-to-many class="kp.beans.wf.pojo.MocWfAtt"/>
+        </set>
+        <set cascade="save-update,delete" fetch="select" inverse="true" lazy="true" name="mocUserRoleDts" table="MOC_USER_ROLE_DT">
+            <key>
+                <column length="10" name="USER_ID" not-null="true"/>
+            </key>
+            <one-to-many class="kp.beans.user.pojo.MocUserRoleDt"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="mocUserLoginHistories" table="MOC_USER_LOGIN_HISTORY">
+            <key>
+                <column length="10" name="USER_ID"/>
+            </key>
+            <one-to-many class="kp.beans.user.pojo.MocUserLoginHistory"/>
+        </set>
+     
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 10, 2015 7:53:18 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="kp.beans.data.pojo.MocInitReq" optimistic-lock="version"  table="MOC_INIT_REQ">
+    <id name="caseId" type="integer">
+      <column name="CASE_ID" precision="22" scale="0"/>
+      <generator class="foreign">
+        <param name="property">MocInitMst</param>
+      </generator>
+    </id>
+    <one-to-one class="kp.beans.data.pojo.MocInitMst" constrained="true" name="MocInitMst">
+        </one-to-one>
+    <property name="a1" type="string">
+      <column length="100" name="A1"/>
+    </property>
+    <property name="a2" type="string">
+      <column length="50" name="A2"/>
+    </property>
+    <property name="a3" type="string">
+      <column length="100" name="A3"/>
+    </property>
+    <property name="a4" type="string">
+      <column length="500" name="A4"/>
+    </property>
+    <property name="a5" type="string">
+      <column length="50" name="A5"/>
+    </property>
+    <property name="a6" type="string">
+      <column length="50" name="A6"/>
+    </property>
+    <property name="a7" type="string">
+      <column length="5" name="A7"/>
+    </property>
+    <property name="a8" type="string">
+      <column length="5" name="A8"/>
+    </property>
+    <property name="a9" type="string">
+      <column length="5" name="A9"/>
+    </property>
+    <property name="a10" type="string">
+      <column length="100" name="A10"/>
+    </property>
+    <property name="a11" type="string">
+      <column length="2000" name="A11"/>
+    </property>
+    <property name="a12" type="string">
+      <column length="2000" name="A12"/>
+    </property>
+    <property name="a13" type="string">
+      <column length="2000" name="A13"/>
+    </property>
+    <property name="a14" type="string">
+      <column length="2000" name="A14"/>
+    </property>
+  </class>
+</hibernate-mapping>

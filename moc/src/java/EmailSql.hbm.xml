@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 10, 2015 7:53:18 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping default-cascade="none" default-access="property" default-lazy="true" auto-import="true">
+    <sql-query name="DefaultEmailBody" cacheable="false" callable="false">
+<![CDATA[SELECT moc_init_mst.case_id, moc_init_req.a4, moc_user_mst.user_name creator,
+       TO_CHAR (moc_init_mst.cr_date, 'DD-MON-YYYY'),
+       moc_wf_stg.stg_name stgc, moc_wf_stg_n.stg_name stgn,
+       moc_user_mst_c.user_name userc,
+       TO_CHAR (moc_wf_tran.act_date, 'DD-MON-YYYY')
+  FROM moc_init_mst,
+       moc_init_req,
+       moc_wf_tran,
+       moc_wf_stg,
+       moc_wf_act,
+       moc_wf_stg moc_wf_stg_n,
+       moc_user_mst,
+       moc_user_mst moc_user_mst_c,
+       moc_user_mst moc_user_mst_n
+ WHERE (    (moc_init_mst.case_id = moc_init_req.case_id)
+        AND (moc_init_mst.case_id = moc_wf_tran.case_id)
+        AND (moc_init_mst.user_id = moc_user_mst.user_id)
+        AND (moc_wf_tran.user_c = moc_user_mst_c.user_id)
+        AND (moc_wf_tran.user_n = moc_user_mst_n.user_id)
+        AND (moc_wf_tran.stg_c = moc_wf_stg.stg_id)
+        AND (moc_wf_tran.stg_n = moc_wf_stg_n.stg_id)
+        AND (moc_wf_tran.act = moc_wf_act.act_id)
+        AND (moc_wf_tran.tran_id = (SELECT MAX (tran_id)
+                                      FROM moc_wf_tran t
+                                     WHERE t.case_id = :cid))
+        --AND (moc_wf_tran.is_completed IS NULL)
+        AND (moc_init_mst.case_id = :cid)
+       )]]></sql-query>
+    <sql-query name="Notify" cacheable="false" callable="false">
+<![CDATA[SELECT mst.user_id, mst.email_id
+  FROM moc_user_mst mst, moc_wf_tran tran
+ WHERE mst.user_id = tran.user_n
+   AND tran.is_completed IS NULL
+   AND tran.case_id = :cid ]]></sql-query>
+    <sql-query name="TskEmailBody" cacheable="false" callable="false">
+<![CDATA[SELECT usr.user_name, usr.email_id, usr.user_id, tskmst.doc_title,
+       TO_CHAR (tskdt.tar_date, 'DD-MON-YYYY')
+  FROM moc_init_tsk_dt tskdt, moc_init_tsk_mst tskmst, moc_user_mst usr
+ WHERE tskdt.doc_id = tskmst.doc_id
+   AND tskdt.res_party = usr.user_id
+   AND tskdt.case_id = :cid]]></sql-query>
+    <sql-query name="LstEmailBody" cacheable="false" callable="false">
+<![CDATA[SELECT DISTINCT a.user_c, b.email_id
+           FROM moc_wf_tran a, moc_user_mst b
+          WHERE a.user_c = b.user_id
+            AND a.stg_c IN (1, 2, 3, 8, 9, 10, 11, 12, 13)
+            AND a.case_id =:cid]]></sql-query>
+</hibernate-mapping>

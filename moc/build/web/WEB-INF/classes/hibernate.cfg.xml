@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <!-- Database connection settings -->
+    <property name="connection.driver_class">oracle.jdbc.OracleDriver</property>
+    <property name="connection.url">jdbc:oracle:thin:@200.200.1.79:1531:PAYCLONE</property>
+    <property name="connection.username">dnlbpm</property>
+    <property name="connection.password">dnlbpm</property>
+    <!-- JDBC connection pool (use the built-in) -->
+    <property name="connection.pool_size">1</property>
+    <!-- SQL dialect -->
+    <property name="dialect">org.hibernate.dialect.OracleDialect</property>
+    <!-- Disable the second-level cache -->
+    <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+    <!-- Echo all executed SQL to stdout -->
+    <property name="show_sql">true</property>
+    <!-- Drop and re-create the database schema on startup -->
+    <property name="hbm2ddl.auto">update</property>
+    <property name="hibernate.enable_lazy_load_no_trans">true</property>
+    <!-- Names the annotated entity class -->
+    <mapping resource="kp/beans/user/xml/MocUserLoginHistory.hbm.xml"/>
+    <mapping resource="kp/beans/data/xml/MocEngMst.hbm.xml"/>
+    <mapping resource="kp/beans/wf/xml/MocWfStg.hbm.xml"/>
+    <mapping resource="kp/beans/data/xml/MocInitTskDt.hbm.xml"/>
+    <mapping resource="kp/beans/data/xml/MocInitProd.hbm.xml"/>
+    <mapping resource="kp/beans/data/xml/MocTsMst.hbm.xml"/>
+    <mapping resource="kp/beans/user/xml/MocUserMst.hbm.xml"/>
+    <mapping resource="kp/beans/data/xml/MocInitMst.hbm.xml"/>
+    <mapping resource="kp/beans/user/xml/MocUserRoleDt.hbm.xml"/>
+    <mapping resource="kp/beans/data/xml/MocInitEle.hbm.xml"/>
+    <mapping resource="kp/beans/wf/xml/MocWfTran.hbm.xml"/>
+    <mapping resource="kp/beans/mst/xml/MocPlantMst.hbm.xml"/>
+    <mapping resource="kp/beans/wf/xml/MocWfStgRole.hbm.xml"/>
+    <mapping resource="kp/beans/data/xml/MocInitTskMst.hbm.xml"/>
+    <mapping resource="kp/beans/wf/xml/MocWfUser.hbm.xml"/>
+    <mapping resource="kp/beans/data/xml/MocInitRot.hbm.xml"/>
+    <mapping resource="kp/beans/data/xml/MocInitProc.hbm.xml"/>
+    <mapping resource="kp/beans/mst/xml/MocUnitMst.hbm.xml"/>
+    <mapping resource="kp/beans/data/xml/MocInitSta.hbm.xml"/>
+    <mapping resource="kp/beans/wf/xml/MocWfStgAct.hbm.xml"/>
+    <mapping resource="kp/beans/user/xml/MocUserRoleMst.hbm.xml"/>
+    <mapping resource="kp/beans/data/xml/MocInitPip.hbm.xml"/>
+    <mapping resource="kp/beans/wf/xml/MocWfAtt.hbm.xml"/>
+    <mapping resource="kp/beans/user/xml/MocUserPass.hbm.xml"/>
+    <mapping resource="kp/beans/data/xml/MocInitReq.hbm.xml"/>
+    <mapping resource="kp/beans/data/xml/MocHseMst.hbm.xml"/>
+    <mapping resource="kp/beans/data/xml/MocInitPseq.hbm.xml"/>
+    <mapping resource="kp/beans/data/xml/MocQcMst.hbm.xml"/>
+    <mapping resource="kp/beans/wf/xml/MocWfAct.hbm.xml"/>
+    <mapping resource="kp/beans/user/xml/MocUserHier.hbm.xml"/>
+    <!--SQL Mapping-->
+    <mapping resource="MocSql.hbm.xml"/>
+    <mapping resource="EmailSql.hbm.xml"/>
+    <mapping resource="MocStatusSql.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

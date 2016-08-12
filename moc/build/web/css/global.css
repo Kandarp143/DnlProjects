@@ -1,0 +1,107 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 30, 2015, 12:22:29 PM
+    Author     : 02948
+*/
+
+
+
+body {
+    font-size:90%;
+    font-family:"trebuchet MS", verdana, arial, sans-serif;
+    word-wrap:break-word;
+    margin:0;
+    height: 100%;
+}
+
+table{
+    width:100%;
+}
+
+.err{
+    color: red;
+    font-style: oblique;
+}
+.cur{
+    text-align:right;
+
+}
+.err-list{
+    color: red;
+    font-style: oblique;
+}
+.req{
+    color: red;
+    font-size: x-large;
+
+}
+
+a {
+    font-weight: bold;
+    color: #3b5998;
+    text-decoration: none;
+}
+
+a:hover {
+
+    color: #212121;
+}
+p {
+    font-size:12px;
+    line-height:1.0em;
+    margin:0;
+    padding:3px 0;
+}
+
+#page_header{
+    color:#A70303;font-size: 18px;margin-top: 2px;margin-left: 40%;margin-bottom: 2px;
+}
+
+.form_table {
+    border: 1px solid #C0C0C0;
+    border-collapse: collapse;
+    padding: 3px;
+    width: 95%;
+    margin-left:1%;
+    margin-right:5%;
+    margin-bottom:1%;
+    font-size: small;
+
+}
+.form_table th {
+    border: 1px solid #999999;
+    padding: 1px;
+    background:#C0C0C0;
+    color: #000;
+    text-align: center;
+    font-weight: bold;
+}
+.form_table td {
+    border: 1px solid #C0C0C0;
+    text-align: left;
+    padding: 3px;
+    word-wrap: break-word;
+
+}
+
+.btn {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 2px 10px 2px 10px;
+    margin: 1% 1% 1% 1%;
+}
+select.listofcheckbox,ul.listofcheckbox{ max-height: 100px; overflow: auto; width: 500px;}
+ul.listofcheckbox { list-style-type: none; margin: 0; padding: 0; overflow-x: hidden; }
+li.listofcheckbox { margin: 0; padding: 0; }
+.listofcheckbox label { display: block; color: WindowText; background-color: Window; margin: 0; padding: 0; width: 100%; }
+.listofcheckbox label:hover { background-color: Highlight; color: HighlightText; }
+
+
+
+
+
+
